@@ -508,7 +508,7 @@ code, pre, .mono {
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 4px;
-  color: var(--text-primary);
+  color: var(--accent);
 }
 
 .timeline-period {

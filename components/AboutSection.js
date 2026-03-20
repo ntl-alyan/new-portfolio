@@ -66,7 +66,7 @@ export default function AboutSection({ data }) {
                   <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
                     Nayatel Pvt. Ltd.
                   </div>
-                  <div style={{ fontFamily: 'Space Mono', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                  <div style={{ fontFamily: 'Space Mono', fontSize: '0.78rem', color: 'var(--accent)' }}>
                     Software Engineer · June 2023 – Present
                   </div>
                   <div

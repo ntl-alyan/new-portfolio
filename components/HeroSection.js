@@ -226,7 +226,7 @@ export default function HeroSection({ data }) {
 
       {/* Scroll indicator */}
       <div style={{
-        position: 'absolute', bottom: 40, left: '50%',
+        position: 'absolute', bottom: 40, left: '45%',
         transform: 'translateX(-50%)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
         animation: 'floatBadge 2s ease-in-out infinite',
