@@ -279,7 +279,7 @@ code, pre, .mono {
   background: transparent;
   color: var(--accent);
   border: 1px solid var(--border-hover);
-  margin-left: 12px;
+  /* margin-left: 12px; */
 }
 
 .hero-cta-outline:hover {
