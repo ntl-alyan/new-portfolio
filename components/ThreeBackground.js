@@ -43,7 +43,7 @@ export default function ThreeBackground() {
       starGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
       const starMat = new THREE.PointsMaterial({
-        color: 0xaad4ff,
+        color: 0xFFF6C0,
         size: 0.25,
         transparent: true,
         opacity: theme === 'night' ? 0.8 : 0.15,
@@ -65,7 +65,7 @@ export default function ThreeBackground() {
 
       shapeGeos.forEach((geo, i) => {
         const mat = new THREE.MeshBasicMaterial({
-          color: [0x00d4ff, 0x7c3aed, 0x10b981, 0x00d4ff, 0x7c3aed][i],
+          color: [0x2F6B3F, 0x7FB77E, 0xF7C85C, 0xFFF6C0, 0x2F6B3F][i],
           wireframe: true,
           transparent: true,
           opacity: 0.15,
@@ -87,7 +87,7 @@ export default function ThreeBackground() {
       });
 
       // Grid plane
-      const gridHelper = new THREE.GridHelper(100, 30, 0x00d4ff, 0x0d1629);
+      const gridHelper = new THREE.GridHelper(100, 30, 0x2F6B3F, 0x122a1a);
       gridHelper.position.y = -15;
       gridHelper.material.opacity = 0.08;
       gridHelper.material.transparent = true;

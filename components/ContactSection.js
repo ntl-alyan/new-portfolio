@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const ACHIEVEMENT_ICONS = ['🏆', '📜', '🥉'];
+const ACHIEVEMENT_ICONS = ['🏆', '📜', '📜', '🥉'];
 
 export default function ContactSection({ achievementsData, heroData }) {
   const ref = useRef(null);
@@ -43,7 +43,7 @@ export default function ContactSection({ achievementsData, heroData }) {
               <div className="section-divider" />
             </div>
 
-            <p className="reveal reveal-delay-2" style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 28, fontSize: '0.95rem' }}>
+            <p className="reveal reveal-delay-2" style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 28, fontSize: '0.95rem' }}>
               Have a project in mind, or just want to say hello? I'm always open to discussing new opportunities.
             </p>
 
@@ -71,19 +71,19 @@ export default function ContactSection({ achievementsData, heroData }) {
               <div
                 className="portfolio-card"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(124,58,237,0.05) 100%)',
+                  background: 'linear-gradient(135deg, rgba(47,107,63,0.4) 0%, rgba(127,183,126,0.2) 100%)',
                   borderColor: 'var(--border-hover)',
                   textAlign: 'center',
                   padding: '36px',
                 }}
               >
-                <div style={{ fontFamily: 'Space Mono', fontSize: '0.7rem', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: 12 }}>
+                <div style={{ fontFamily: 'Fira Code', fontSize: '0.7rem', color: 'var(--text-muted-2)', letterSpacing: '0.2em', marginBottom: 12 }}>
                   CURRENTLY OPEN TO
                 </div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)', marginBottom: 8 }}>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-muted-2)', marginBottom: 8 }}>
                   Full-Time Roles & Freelance
                 </div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted-2)' }}>
                   Next.js · NestJS · Full Stack Development
                 </div>
               </div>

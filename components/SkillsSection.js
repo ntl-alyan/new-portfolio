@@ -14,8 +14,8 @@ export default function SkillsSection({ data }) {
 
   const categories = [
     { key: 'languages', label: 'Languages & Markups', color: 'var(--accent)' },
-    { key: 'frameworks', label: 'Frameworks & Databases', color: 'var(--accent-2)' },
-    { key: 'tools', label: 'Tools & DevOps', color: 'var(--accent-3)' },
+    { key: 'frameworks', label: 'Frameworks & Databases', color: 'var(--accent)' },
+    { key: 'tools', label: 'Tools & DevOps', color: 'var(--accent)' },
   ];
 
   return (
@@ -55,7 +55,7 @@ export default function SkillsSection({ data }) {
                 style={{
                   width: 4,
                   height: `${Math.random() * 40 + 10}px`,
-                  background: `hsl(${190 + i * 4}, 80%, 60%)`,
+                  background: `hsl(${90 + i * 2}, 50%, ${40 + (i % 5) * 8}%)`,
                   borderRadius: 2,
                   animation: `pulse ${1 + Math.random()}s ease-in-out infinite`,
                   animationDelay: `${Math.random()}s`,

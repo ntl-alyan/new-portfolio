@@ -21,7 +21,7 @@ export default function ExperienceSection({ data }) {
               {/* <span className="section-label">// experience</span> */}
               <h2 className="section-title">Where I've<br />Worked.</h2>
               <div className="section-divider" />
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.7, fontFamily: 'Space Mono' }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.7, fontFamily: 'Fira Code' }}>
                 Building production systems that handle real users, real data, and real scale.
               </p>
             </div>

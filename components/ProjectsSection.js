@@ -28,7 +28,7 @@ export default function ProjectsSection({ data }) {
                 className={`project-card reveal reveal-delay-${i + 1}`}
                 style={{ '--project-color': project.color }}
               >
-                <div className="project-number mono">0{i + 1}</div>
+                <div className="project-number" style={{ color: 'var(--text-muted)' }}>0{i + 1}</div>
 
                 <div
                   style={{

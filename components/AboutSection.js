@@ -32,10 +32,10 @@ export default function AboutSection({ data }) {
               <div className="section-divider" />
             </div>
             <div className="reveal reveal-delay-1">
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.97rem', marginBottom: 24 }}>
+              <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.97rem', marginBottom: 24 }}>
                 {data.bio}
               </p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.97rem' }}>
+              <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.97rem' }}>
                 Studied <strong style={{ color: 'var(--accent)' }}>{data.degree}</strong> at{' '}
                 <strong style={{ color: 'var(--accent)' }}>{data.university}</strong>,
                 where I built a foundation in software engineering and systems design.
@@ -48,7 +48,7 @@ export default function AboutSection({ data }) {
               {stats.map((s, i) => (
                 <div className="col-4" key={s.label}>
                   <div className={`portfolio-card text-center reveal reveal-delay-${i + 1}`}>
-                    <div style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'Space Mono', lineHeight: 1 }}>
+                    <div style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'Fira Code', lineHeight: 1 }}>
                       {s.value}
                     </div>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 8, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
@@ -60,13 +60,13 @@ export default function AboutSection({ data }) {
 
               <div className="col-12">
                 <div className="portfolio-card reveal reveal-delay-2" style={{ padding: '28px 32px' }}>
-                  <div style={{ fontFamily: 'Space Mono', fontSize: '0.7rem', color: 'var(--accent-2)', letterSpacing: '0.15em', marginBottom: 12 }}>
+                  <div style={{ fontFamily: 'Fira Code', fontSize: '0.7rem', color: 'var(--accent-2)', letterSpacing: '0.15em', marginBottom: 12 }}>
                     CURRENTLY WORKING AT
                   </div>
                   <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
                     Nayatel Pvt. Ltd.
                   </div>
-                  <div style={{ fontFamily: 'Space Mono', fontSize: '0.78rem', color: 'var(--accent)' }}>
+                  <div style={{ fontFamily: 'Fira Code', fontSize: '0.78rem', color: 'var(--accent)' }}>
                     Software Engineer · June 2023 – Present
                   </div>
                   <div
@@ -76,15 +76,15 @@ export default function AboutSection({ data }) {
                       gap: 6,
                       marginTop: 14,
                       padding: '4px 12px',
-                      background: 'rgba(16,185,129,0.1)',
-                      border: '1px solid rgba(16,185,129,0.25)',
+                      background: 'rgba(3, 51, 16, 0.15)',
+                      border: '1px solid rgba(3, 51, 16, 0.3)',
                       borderRadius: 50,
-                      fontSize: '0.7rem',
-                      color: 'var(--accent-3)',
-                      fontFamily: 'Space Mono',
+                      fontSize: '0.75rem',
+                      color: 'var(--text-muted)',
+                      fontFamily: 'Fira Code',
                     }}
                   >
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-3)', display: 'inline-block', animation: 'pulse 2s infinite' }} />
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', animation: 'pulse 2s infinite' }} />
                     Active
                   </div>
                 </div>

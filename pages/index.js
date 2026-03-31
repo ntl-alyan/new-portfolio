@@ -49,9 +49,9 @@ export default function Home({ initialData }) {
         <ContactSection achievementsData={data.achievements} heroData={data.hero} />
       </main>
 
-      <footer className="portfolio-footer">
+      <footer className="portfolio-footer" style={{ color: 'var(--text-muted-2)', fontSize: '0.85rem' }}>
         <div className="container">
-          <span className="mono">
+          <span className='mono'>
             © {new Date().getFullYear()} {data.hero.name} · Built with Next.js & Three.js
           </span>
         </div>
