@@ -138,7 +138,7 @@ export default function HeroSection({ data }) {
                     background: 'var(--bg-primary)', zIndex: 1,
                   }} />
                   <img
-                    src="/avatar.png"
+                    src="/avatar.jpeg"
                     alt="Alyan Quddoos"
                     style={{
                       position: 'absolute', inset: 10,
