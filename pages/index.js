@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
@@ -9,16 +8,7 @@ import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import { getPortfolioData } from '../lib/portfolioData';
 
-export default function Home({ initialData }) {
-  const [data, setData] = useState(initialData);
-
-  // Re-fetch on client for any admin edits
-  useEffect(() => {
-    fetch('/api/portfolio')
-      .then(r => r.json())
-      .then(setData)
-      .catch(() => {});
-  }, []);
+export default function Home({ data }) {
 
   const pageTitle = `${data.hero.name} | ${data.hero.title}`;
 
@@ -57,8 +47,8 @@ export default function Home({ initialData }) {
 
       <footer className="footer">
         <div className="wrap footer-inner">
-          <span>© {new Date().getFullYear()} {data.hero.name}</span>
-          <span className="footer-note mono">Made in {data.hero.location?.split(',')[0] || 'Islamabad'} with Next.js and Three.js</span>
+          <span>© {new Date().getFullYear()} {data.hero.name}. All rights reserved.</span>
+          <span className="footer-note mono">Built with Next.js and Three.js</span>
           <a href="#top" className="footer-top">Back to top ↑</a>
         </div>
       </footer>
@@ -66,7 +56,6 @@ export default function Home({ initialData }) {
   );
 }
 
-export async function getServerSideProps() {
-  const data = getPortfolioData();
-  return { props: { initialData: data } };
+export async function getStaticProps() {
+  return { props: { data: getPortfolioData() } };
 }

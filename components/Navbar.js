@@ -67,7 +67,7 @@ export default function Navbar({ name }) {
             <button className="icon-btn" onClick={toggleTheme} aria-label={`Switch to ${theme === 'night' ? 'light' : 'dark'} theme`}>
               <Icon name={theme === 'night' ? 'sun' : 'moon'} size={17} />
             </button>
-            <a href="#contact" className="cta cta-primary cta-sm tb-cta">Say hello</a>
+            <a href="#contact" className="cta cta-primary cta-sm tb-cta">Get in touch</a>
             <button className="icon-btn tb-burger" onClick={() => setOpen(true)} aria-label="Open menu">
               <Icon name="menu" size={18} />
             </button>

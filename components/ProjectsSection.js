@@ -6,9 +6,9 @@ export default function ProjectsSection({ data }) {
       <div className="wrap">
         <SectionHeading
           index="03"
-          eyebrow="Work"
-          title="Things I've built."
-          lead="The three systems I spend most of my time on. People at Nayatel and our customers use them every day."
+          eyebrow="Selected work"
+          title="Key projects."
+          lead="Enterprise platforms that support Nayatel's operations and customers every day."
         />
 
         <div className="projects-grid">

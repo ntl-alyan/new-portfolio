@@ -56,7 +56,7 @@ export default function HeroSection({ data, stats = [] }) {
 
           <motion.div className="hero-actions" {...fade(0.6)}>
             <a href="#projects" className="cta cta-primary">
-              See my work <Icon name="arrow" size={16} />
+              View my work <Icon name="arrow" size={16} />
             </a>
             <a href="#contact" className="cta cta-ghost">Get in touch</a>
           </motion.div>

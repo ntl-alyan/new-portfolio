@@ -1,9 +1,9 @@
 import { Reveal, SectionHeading, TiltCard, Icon } from './ui';
 
 const PRINCIPLES = [
-  ['Security from day one', 'Every service gets signed requests, strict validation and auth at the gateway.'],
-  ['Boring deployments', 'Jenkins and Ansible do the repetitive work, so a release is just another afternoon.'],
-  ['Code other people can build on', 'Shared components, clear conventions and code reviews that actually help.'],
+  ['Security first', 'Signed requests, strict validation and gateway-level authentication across every service.'],
+  ['Reliable delivery', 'Automated CI/CD with Jenkins and Ansible for consistent, low-risk releases.'],
+  ['Engineering standards', 'Reusable components, clear conventions and thorough code reviews.'],
 ];
 
 export default function AboutSection({ data, hero, experience }) {
@@ -15,7 +15,7 @@ export default function AboutSection({ data, hero, experience }) {
         <SectionHeading
           index="01"
           eyebrow="About"
-          title={<>A little about me.<br /><span className="muted-title">The short version.</span></>}
+          title={<>Building reliable software.<br /><span className="muted-title">Leading capable teams.</span></>}
         />
 
         <div className="about-grid">
@@ -43,7 +43,7 @@ export default function AboutSection({ data, hero, experience }) {
                 <Reveal delay={0.1} className="fact">
                   <span className="fact-icon"><Icon name="code" /></span>
                   <div>
-                    <div className="fact-label">Right now</div>
+                    <div className="fact-label">Current role</div>
                     <div className="fact-value">{current.role} · {current.company}</div>
                   </div>
                 </Reveal>
@@ -59,7 +59,7 @@ export default function AboutSection({ data, hero, experience }) {
                 <Reveal delay={0.2} className="fact">
                   <span className="fact-icon"><Icon name="pin" /></span>
                   <div>
-                    <div className="fact-label">Where I live</div>
+                    <div className="fact-label">Location</div>
                     <div className="fact-value">{hero.location}</div>
                   </div>
                 </Reveal>

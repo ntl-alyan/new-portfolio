@@ -7,8 +7,8 @@ export default function ExperienceSection({ data }) {
         <SectionHeading
           index="02"
           eyebrow="Experience"
-          title="Where I've worked."
-          lead="My whole career so far has been at Nayatel. I joined as a software engineer and have taken on more of the team side over time."
+          title="Professional experience."
+          lead="Over three years at Nayatel, progressing from Software Engineer to Assistant Manager through fast-track promotions."
         />
 
         <div className="xp-list">

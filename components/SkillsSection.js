@@ -1,10 +1,10 @@
 import { Reveal, SectionHeading } from './ui';
 
 const GROUPS = [
-  { key: 'frameworks', label: 'Frameworks & Data', note: 'Building the apps' },
-  { key: 'languages', label: 'Languages', note: 'Day to day' },
-  { key: 'tools', label: 'Platform & DevOps', note: 'Shipping and running it' },
-  { key: 'leadership', label: 'Leadership', note: 'Working with people' },
+  { key: 'frameworks', label: 'Frameworks & Data', note: 'Application development' },
+  { key: 'languages', label: 'Languages', note: 'Core languages' },
+  { key: 'tools', label: 'Platform & DevOps', note: 'Infrastructure & delivery' },
+  { key: 'leadership', label: 'Leadership', note: 'Management & collaboration' },
 ];
 
 export function TechMarquee({ skills }) {
@@ -28,7 +28,7 @@ export default function SkillsSection({ data }) {
   return (
     <section id="skills" className="section">
       <div className="wrap">
-        <SectionHeading index="04" eyebrow="Stack" title="What I work with." />
+        <SectionHeading index="04" eyebrow="Stack" title="Technical expertise." />
 
         <div className="skills-grid">
           {groups.map((g, i) => (

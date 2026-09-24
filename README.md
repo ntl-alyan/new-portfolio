@@ -1,6 +1,6 @@
 # Alyan Quddoos — Portfolio
 
-A full-stack developer portfolio built with **Next.js**, **Bootstrap 5**, **Three.js** (animated background), and a **day/night theme toggle**.
+Personal portfolio built with **Next.js**, **React Three Fiber** and **Framer Motion**, with dark and light themes.
 
 ## ✨ Features
 
@@ -8,8 +8,7 @@ A full-stack developer portfolio built with **Next.js**, **Bootstrap 5**, **Thre
 - 🌙/☀️ **Dark & light themes** — persisted via localStorage, applied before first paint (no flash)
 - 🎞️ **Motion** — framer-motion scroll reveals, 3D tilt cards with cursor spotlight, tech marquee, scroll progress bar; respects `prefers-reduced-motion`
 - 📱 **Fully responsive** — custom CSS grid layout with a full-screen mobile menu
-- 🔐 **Hidden admin panel** — accessible only at `/admin`
-- 🎛️ **Admin CMS** — edit all portfolio content without touching code
+- ⚡ **Statically generated** — all content in one data file, pre-rendered at build time
 
 ## 🚀 Getting Started
 
@@ -19,25 +18,6 @@ npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000)
-
-## 🔐 Admin Panel
-
-Access the admin panel at:
-
-```
-http://localhost:3000/admin
-```
-
-There is **no link** to this page from the portfolio. Bookmark it or remember the URL.
-
-From the admin panel you can edit:
-- Hero section (name, title, subtitle, email, phone)
-- About section (bio, university, degree)
-- Skills (languages, frameworks, tools)
-- All 3 projects (name, description, tech, accent color)
-- Achievements
-
-> **Note:** Data is stored in-memory on the server. For production persistence, connect `lib/portfolioData.js` to a database (PostgreSQL recommended given your stack!).
 
 ## 📁 Project Structure
 
@@ -56,12 +36,11 @@ portfolio/
 ├── context/
 │   └── ThemeContext.js       # Day/night theme provider
 ├── lib/
-│   └── portfolioData.js      # Data store (swap for DB)
+│   └── portfolioData.js      # All portfolio content
 ├── pages/
 │   ├── index.js              # Main portfolio page
-│   ├── _app.js               # Bootstrap + theme
-│   ├── admin/index.js        # 🔐 Admin panel
-│   └── api/portfolio.js      # REST API for data
+│   ├── _app.js               # Global styles + theme
+│   └── _document.js          # Fonts + no-flash theme script
 └── styles/
     └── globals.css           # All styling + CSS variables
 ```
@@ -70,13 +49,11 @@ portfolio/
 
 All colors are CSS variables in `styles/globals.css` under `[data-theme="night"]` and `[data-theme="day"]`. Globe colors live in `PALETTES` in `components/HeroScene.js`.
 
-To add a new project, edit `lib/portfolioData.js` or use the admin panel.
+To change any content (bio, experience, projects, skills, achievements), edit `lib/portfolioData.js`.
 
 ## 🛠️ Tech Stack
 
-- **Next.js 14** — SSR + API routes
+- **Next.js 14** — static generation
 - **Three.js + React Three Fiber** — 3D hero scene
 - **Framer Motion** — animations
-- **Bootstrap 5** — admin panel styling only
 - **CSS Variables** — Theming system
-- **Scroll Intersection Observer** — Reveal animations
