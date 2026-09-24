@@ -1,68 +1,47 @@
-import { useEffect, useRef } from 'react';
+import { Reveal, SectionHeading } from './ui';
+
+const GROUPS = [
+  { key: 'frameworks', label: 'Frameworks & Data', note: 'Building the apps' },
+  { key: 'languages', label: 'Languages', note: 'Day to day' },
+  { key: 'tools', label: 'Platform & DevOps', note: 'Shipping and running it' },
+  { key: 'leadership', label: 'Leadership', note: 'Working with people' },
+];
+
+export function TechMarquee({ skills }) {
+  const items = [...(skills.frameworks || []), ...(skills.tools || []), ...(skills.languages || [])];
+  const row = [...items, ...items];
+  return (
+    <div className="marquee" aria-hidden="true">
+      <div className="marquee-track">
+        {row.map((t, i) => (
+          <span key={i} className="marquee-item">
+            {t}<span className="marquee-sep">✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function SkillsSection({ data }) {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: 0.15 }
-    );
-    ref.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const categories = [
-    { key: 'languages', label: 'Languages & Markups', color: 'var(--accent)' },
-    { key: 'frameworks', label: 'Frameworks & Databases', color: 'var(--accent)' },
-    { key: 'tools', label: 'Tools & DevOps', color: 'var(--accent)' },
-  ];
-
+  const groups = GROUPS.filter((g) => data[g.key]?.length);
   return (
-    <section id="skills" className="section" ref={ref} style={{ background: 'rgba(0,0,0,0.1)' }}>
-      <div className="container">
-        <div className="reveal">
-          {/* <span className="section-label">// skills</span> */}
-          <h2 className="section-title">Tech Stack.</h2>
-          <div className="section-divider" />
-        </div>
+    <section id="skills" className="section">
+      <div className="wrap">
+        <SectionHeading index="04" eyebrow="Stack" title="What I work with." />
 
-        <div className="row g-4">
-          {categories.map((cat, idx) => (
-            <div className="col-lg-4" key={cat.key}>
-              <div className={`portfolio-card reveal reveal-delay-${idx + 1}`} style={{ height: '100%' }}>
-                <div className="skill-category-label" style={{ color: cat.color }}>
-                  {cat.label}
-                </div>
-                <div>
-                  {(data[cat.key] || []).map(skill => (
-                    <span key={skill} className="skill-chip">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+        <div className="skills-grid">
+          {groups.map((g, i) => (
+            <Reveal key={g.key} delay={i * 0.06} className="skill-group">
+              <div className="skill-head">
+                <span className="skill-label">{g.label}</span>
+                <span className="skill-note">{g.note}</span>
               </div>
-            </div>
+              <ul className="skill-chips">
+                {data[g.key].map((s) => <li key={s}>{s}</li>)}
+              </ul>
+            </Reveal>
           ))}
-        </div>
-
-        {/* Visual bar */}
-        <div className="reveal reveal-delay-2" style={{ marginTop: 60 }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center', opacity: 0.25 }}>
-            {Array.from({ length: 40 }).map((_, i) => (
-              <div
-                key={i}
-                style={{
-                  width: 4,
-                  height: `${Math.random() * 40 + 10}px`,
-                  background: `hsl(${90 + i * 2}, 50%, ${40 + (i % 5) * 8}%)`,
-                  borderRadius: 2,
-                  animation: `pulse ${1 + Math.random()}s ease-in-out infinite`,
-                  animationDelay: `${Math.random()}s`,
-                }}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

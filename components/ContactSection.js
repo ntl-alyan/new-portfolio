@@ -1,96 +1,97 @@
-import { useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { Reveal, SectionHeading, Icon } from './ui';
 
-const ACHIEVEMENT_ICONS = ['🏆', '📜', '📜', '🥉'];
+const ACHIEVEMENT_ICONS = ['trophy', 'cert', 'code', 'award'];
+
+function splitAchievement(text) {
+  const i = text.indexOf(':');
+  return i > 0 ? [text.slice(0, i), text.slice(i + 1).trim()] : [text, ''];
+}
 
 export default function ContactSection({ achievementsData, heroData }) {
-  const ref = useRef(null);
+  const [copied, setCopied] = useState(false);
+  const phoneDigits = heroData.phone.replace(/[^0-9]/g, '');
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: 0.1 }
-    );
-    ref.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(heroData.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {}
+  };
+
+  const links = [
+    { icon: 'mail', label: 'Email', value: heroData.email, href: `mailto:${heroData.email}` },
+    { icon: 'phone', label: 'WhatsApp', value: heroData.phone, href: `https://wa.me/${phoneDigits}` },
+    heroData.linkedin && { icon: 'linkedin', label: 'LinkedIn', value: heroData.linkedin.replace(/^https?:\/\/(www\.)?/, ''), href: heroData.linkedin },
+    heroData.github && { icon: 'github', label: 'GitHub', value: heroData.github.replace(/^https?:\/\/(www\.)?/, ''), href: heroData.github },
+  ].filter(Boolean);
 
   return (
-    <section id="contact" className="section" ref={ref}>
-      <div className="container">
-        <div className="row g-5">
-          {/* Achievements */}
-          <div className="col-lg-6">
-            <div className="reveal">
-              {/* <span className="section-label">// achievements</span> */}
-              <h2 className="section-title">Recognition.</h2>
-              <div className="section-divider" />
-            </div>
-            <div>
-              {achievementsData.map((a, i) => (
-                <div className={`achievement-item reveal reveal-delay-${i + 1}`} key={i}>
-                  <span className="achievement-icon">{ACHIEVEMENT_ICONS[i] || '⭐'}</span>
-                  <span className="achievement-text">{a}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact */}
-          <div className="col-lg-6">
-            <div className="reveal reveal-delay-1">
-              {/* <span className="section-label">// contact</span> */}
-              <h2 className="section-title">Let's Talk.</h2>
-              <div className="section-divider" />
-            </div>
-
-            <p className="reveal reveal-delay-2" style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 28, fontSize: '0.95rem' }}>
-              Have a project in mind, or just want to say hello? I'm always open to discussing new opportunities.
-            </p>
-
-            <div className="reveal reveal-delay-2">
-              <a href={`mailto:${heroData.email}`} className="contact-link">
-                <span className="contact-icon">✉️</span>
-                <span>{heroData.email}</span>
-              </a>
-              <a href={`https://wa.me/${heroData.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="contact-link">
-                <span className="contact-icon">💬</span>
-                <span>WhatsApp — {heroData.phone}</span>
-              </a>
-              <a href="https://linkedin.com/in/alyanquddoos111" target="_blank" rel="noreferrer" className="contact-link">
-                <span className="contact-icon">🔗</span>
-                <span>LinkedIn Profile</span>
-              </a>
-              <a href="https://github.com/ntl-alyan" target="_blank" rel="noreferrer" className="contact-link">
-                <span className="contact-icon">🐙</span>
-                <span>GitHub Profile</span>
-              </a>
-            </div>
-
-            {/* CTA card */}
-            <div className="reveal reveal-delay-3" style={{ marginTop: 24 }}>
-              <div
-                className="portfolio-card"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(47,107,63,0.4) 0%, rgba(127,183,126,0.2) 100%)',
-                  borderColor: 'var(--border-hover)',
-                  textAlign: 'center',
-                  padding: '36px',
-                }}
-              >
-                <div style={{ fontFamily: 'Fira Code', fontSize: '0.7rem', color: 'var(--text-muted-2)', letterSpacing: '0.2em', marginBottom: 12 }}>
-                  CURRENTLY OPEN TO
-                </div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-muted-2)', marginBottom: 8 }}>
-                  Full-Time Roles & Freelance
-                </div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted-2)' }}>
-                  Next.js · NestJS · Full Stack Development
-                </div>
-              </div>
-            </div>
+    <>
+      <section id="recognition" className="section">
+        <div className="wrap">
+          <SectionHeading index="05" eyebrow="Recognition" title="A few things I'm proud of." />
+          <div className="awards-grid">
+            {achievementsData.map((a, i) => {
+              const [title, detail] = splitAchievement(a);
+              return (
+                <Reveal key={i} delay={i * 0.06} className="award">
+                  <span className="award-icon"><Icon name={ACHIEVEMENT_ICONS[i] || 'award'} size={20} /></span>
+                  <div>
+                    <div className="award-title">{title}</div>
+                    {detail && <div className="award-detail">{detail}</div>}
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section id="contact" className="section contact">
+        <div className="wrap">
+          <Reveal className="contact-panel">
+            <div className="contact-bg" aria-hidden="true" />
+            <div className="contact-copy">
+              <div className="eyebrow">
+                <span className="eyebrow-index">06</span>
+                <span className="eyebrow-line" />
+                <span>Contact</span>
+              </div>
+              <h2 className="contact-title">Want to work together?</h2>
+              <p className="contact-lead">
+                Whether you&apos;re hiring, building something interesting, or just want to talk shop,
+                I&apos;d be glad to hear from you. Email is the best way to reach me.
+              </p>
+              <div className="contact-actions">
+                <a href={`mailto:${heroData.email}`} className="cta cta-primary">
+                  Email me <Icon name="arrow" size={16} />
+                </a>
+                <button type="button" className="cta cta-ghost" onClick={copyEmail}>
+                  <Icon name={copied ? 'check' : 'copy'} size={16} />
+                  {copied ? 'Copied' : 'Copy email'}
+                </button>
+              </div>
+            </div>
+
+            <ul className="contact-links">
+              {links.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="contact-link">
+                    <span className="contact-link-icon"><Icon name={l.icon} /></span>
+                    <span className="contact-link-text">
+                      <span className="contact-link-label">{l.label}</span>
+                      <span className="contact-link-value">{l.value}</span>
+                    </span>
+                    <Icon name="arrowUpRight" size={16} className="contact-link-arrow" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }

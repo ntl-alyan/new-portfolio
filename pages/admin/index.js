@@ -227,7 +227,7 @@ function HeroAdmin({ data, saving, saved, onSave }) {
   return (
     <div className="admin-card">
       <div className="admin-section-title">HERO SECTION</div>
-      {['name', 'title', 'subtitle', 'email', 'phone'].map(field => (
+      {['name', 'title', 'company', 'subtitle', 'email', 'phone', 'location', 'linkedin', 'github'].map(field => (
         <div key={field}>
           <label className="admin-label">{field.toUpperCase()}</label>
           <input
@@ -268,18 +268,20 @@ function SkillsAdmin({ data, saving, saved, onSave }) {
     languages: data.languages.join(', '),
     frameworks: data.frameworks.join(', '),
     tools: data.tools.join(', '),
+    leadership: (data.leadership || []).join(', '),
   });
 
   const buildPayload = () => ({
     languages: form.languages.split(',').map(s => s.trim()).filter(Boolean),
     frameworks: form.frameworks.split(',').map(s => s.trim()).filter(Boolean),
     tools: form.tools.split(',').map(s => s.trim()).filter(Boolean),
+    leadership: form.leadership.split(',').map(s => s.trim()).filter(Boolean),
   });
 
   return (
     <div className="admin-card">
       <div className="admin-section-title">SKILLS (comma-separated)</div>
-      {['languages', 'frameworks', 'tools'].map(k => (
+      {['languages', 'frameworks', 'tools', 'leadership'].map(k => (
         <div key={k}>
           <label className="admin-label">{k.toUpperCase()}</label>
           <input className="admin-input" value={form[k]} onChange={e => setForm(f => ({ ...f, [k]: e.target.value }))} />

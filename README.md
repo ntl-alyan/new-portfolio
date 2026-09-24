@@ -4,10 +4,10 @@ A full-stack developer portfolio built with **Next.js**, **Bootstrap 5**, **Thre
 
 ## ✨ Features
 
-- 🌌 **Three.js animated background** — floating wireframe shapes, particle stars, interactive mouse parallax
-- 🌙/☀️ **Day & Night theme** — persisted via localStorage
-- 📱 **Fully responsive** — Bootstrap 5 grid
-- 🎯 **Scroll-reveal animations** — sections animate in as you scroll
+- 🌐 **3D network globe hero** — React Three Fiber scene (point-cloud sphere, orbit rings, animated data arcs) that follows the cursor and pauses when off-screen
+- 🌙/☀️ **Dark & light themes** — persisted via localStorage, applied before first paint (no flash)
+- 🎞️ **Motion** — framer-motion scroll reveals, 3D tilt cards with cursor spotlight, tech marquee, scroll progress bar; respects `prefers-reduced-motion`
+- 📱 **Fully responsive** — custom CSS grid layout with a full-screen mobile menu
 - 🔐 **Hidden admin panel** — accessible only at `/admin`
 - 🎛️ **Admin CMS** — edit all portfolio content without touching code
 
@@ -44,8 +44,9 @@ From the admin panel you can edit:
 ```
 portfolio/
 ├── components/
-│   ├── ThreeBackground.js   # Three.js canvas (stars + shapes)
-│   ├── Navbar.js             # Fixed nav + theme toggle
+│   ├── HeroScene.js          # React Three Fiber globe
+│   ├── ui.js                 # Reveal, SectionHeading, TiltCard, Icon
+│   ├── Navbar.js             # Floating nav, active section, theme toggle
 │   ├── HeroSection.js        # Landing hero
 │   ├── AboutSection.js       # Bio + stats
 │   ├── SkillsSection.js      # Tech stack chips
@@ -67,14 +68,15 @@ portfolio/
 
 ## 🎨 Customization
 
-All colors are CSS variables in `styles/globals.css` under `[data-theme="night"]` and `[data-theme="day"]`.
+All colors are CSS variables in `styles/globals.css` under `[data-theme="night"]` and `[data-theme="day"]`. Globe colors live in `PALETTES` in `components/HeroScene.js`.
 
 To add a new project, edit `lib/portfolioData.js` or use the admin panel.
 
 ## 🛠️ Tech Stack
 
 - **Next.js 14** — SSR + API routes
-- **Bootstrap 5** — Layout & responsive grid
-- **Three.js** — 3D animated background
+- **Three.js + React Three Fiber** — 3D hero scene
+- **Framer Motion** — animations
+- **Bootstrap 5** — admin panel styling only
 - **CSS Variables** — Theming system
 - **Scroll Intersection Observer** — Reveal animations

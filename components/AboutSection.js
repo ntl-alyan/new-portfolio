@@ -1,95 +1,79 @@
-import { useEffect, useRef } from 'react';
+import { Reveal, SectionHeading, TiltCard, Icon } from './ui';
 
-export default function AboutSection({ data }) {
-  const ref = useRef(null);
+const PRINCIPLES = [
+  ['Security from day one', 'Every service gets signed requests, strict validation and auth at the gateway.'],
+  ['Boring deployments', 'Jenkins and Ansible do the repetitive work, so a release is just another afternoon.'],
+  ['Code other people can build on', 'Shared components, clear conventions and code reviews that actually help.'],
+];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      }),
-      { threshold: 0.15 }
-    );
-    const els = ref.current?.querySelectorAll('.reveal');
-    els?.forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const stats = [
-    { value: '2+', label: 'Years Experience' },
-    { value: '3', label: 'Products Shipped' },
-    { value: '∞', label: 'Lines of Code' },
-  ];
+export default function AboutSection({ data, hero, experience }) {
+  const current = experience?.[0];
 
   return (
-    <section id="about" className="section" ref={ref}>
-      <div className="container">
-        <div className="row align-items-center g-5">
-          <div className="col-lg-6">
-            <div className="reveal">
-              {/* <span className="section-label">// about me</span> */}
-              <h2 className="section-title">Building Things<br />That Scale.</h2>
-              <div className="section-divider" />
-            </div>
-            <div className="reveal reveal-delay-1">
-              <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.97rem', marginBottom: 24 }}>
-                {data.bio}
-              </p>
-              <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.97rem' }}>
-                Studied <strong style={{ color: 'var(--accent)' }}>{data.degree}</strong> at{' '}
-                <strong style={{ color: 'var(--accent)' }}>{data.university}</strong>,
-                where I built a foundation in software engineering and systems design.
-              </p>
-            </div>
-          </div>
+    <section id="about" className="section">
+      <div className="wrap">
+        <SectionHeading
+          index="01"
+          eyebrow="About"
+          title={<>A little about me.<br /><span className="muted-title">The short version.</span></>}
+        />
 
-          <div className="col-lg-6">
-            <div className="row g-3">
-              {stats.map((s, i) => (
-                <div className="col-4" key={s.label}>
-                  <div className={`portfolio-card text-center reveal reveal-delay-${i + 1}`}>
-                    <div style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'Fira Code', lineHeight: 1 }}>
-                      {s.value}
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 8, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                      {s.label}
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              <div className="col-12">
-                <div className="portfolio-card reveal reveal-delay-2" style={{ padding: '28px 32px' }}>
-                  <div style={{ fontFamily: 'Fira Code', fontSize: '0.7rem', color: 'var(--accent-2)', letterSpacing: '0.15em', marginBottom: 12 }}>
-                    CURRENTLY WORKING AT
-                  </div>
-                  <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
-                    Nayatel Pvt. Ltd.
-                  </div>
-                  <div style={{ fontFamily: 'Fira Code', fontSize: '0.78rem', color: 'var(--accent)' }}>
-                    Software Engineer · June 2023 – Present
-                  </div>
-                  <div
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      marginTop: 14,
-                      padding: '4px 12px',
-                      background: 'rgba(3, 51, 16, 0.15)',
-                      border: '1px solid rgba(3, 51, 16, 0.3)',
-                      borderRadius: 50,
-                      fontSize: '0.75rem',
-                      color: 'var(--text-muted)',
-                      fontFamily: 'Fira Code',
-                    }}
-                  >
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', animation: 'pulse 2s infinite' }} />
-                    Active
-                  </div>
+        <div className="about-grid">
+          <Reveal className="about-portrait-col">
+            <TiltCard className="portrait-card" max={6}>
+              <div className="portrait-frame">
+                <img src="/avatar.png" alt={hero.name} className="portrait-img" />
+              </div>
+              <div className="portrait-meta">
+                <div>
+                  <div className="portrait-name">{hero.name}</div>
+                  <div className="portrait-role">{current?.role || hero.title}</div>
                 </div>
               </div>
+            </TiltCard>
+          </Reveal>
+
+          <div className="about-body">
+            <Reveal delay={0.05}>
+              <p className="about-lead">{data.bio}</p>
+            </Reveal>
+
+            <div className="about-facts">
+              {current && (
+                <Reveal delay={0.1} className="fact">
+                  <span className="fact-icon"><Icon name="code" /></span>
+                  <div>
+                    <div className="fact-label">Right now</div>
+                    <div className="fact-value">{current.role} · {current.company}</div>
+                  </div>
+                </Reveal>
+              )}
+              <Reveal delay={0.15} className="fact">
+                <span className="fact-icon"><Icon name="grad" /></span>
+                <div>
+                  <div className="fact-label">Education</div>
+                  <div className="fact-value">{data.degree} · {data.university}</div>
+                </div>
+              </Reveal>
+              {hero.location && (
+                <Reveal delay={0.2} className="fact">
+                  <span className="fact-icon"><Icon name="pin" /></span>
+                  <div>
+                    <div className="fact-label">Where I live</div>
+                    <div className="fact-value">{hero.location}</div>
+                  </div>
+                </Reveal>
+              )}
             </div>
+
+            <Reveal delay={0.25} className="principles">
+              {PRINCIPLES.map(([t, d]) => (
+                <div className="principle" key={t}>
+                  <div className="principle-title">{t}</div>
+                  <div className="principle-desc">{d}</div>
+                </div>
+              ))}
+            </Reveal>
           </div>
         </div>
       </div>

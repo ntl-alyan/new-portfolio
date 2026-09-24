@@ -1,16 +1,13 @@
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
-import SkillsSection from '../components/SkillsSection';
+import SkillsSection, { TechMarquee } from '../components/SkillsSection';
 import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import { getPortfolioData } from '../lib/portfolioData';
-
-const ThreeBackground = dynamic(() => import('../components/ThreeBackground'), { ssr: false });
 
 export default function Home({ initialData }) {
   const [data, setData] = useState(initialData);
@@ -19,41 +16,50 @@ export default function Home({ initialData }) {
   useEffect(() => {
     fetch('/api/portfolio')
       .then(r => r.json())
-      .then(setData);
+      .then(setData)
+      .catch(() => {});
   }, []);
+
+  const pageTitle = `${data.hero.name} | ${data.hero.title}`;
 
   return (
     <>
       <Head>
-        <title>{data.hero.name} — Full Stack Developer</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={data.hero.subtitle} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index,follow" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap"
-          rel="stylesheet"
-        />
+        <meta name="theme-color" content="#07080c" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={data.hero.subtitle} />
+        <meta property="og:image" content="/avatar.png" />
+        <link rel="icon" href="/avatar.png" />
       </Head>
 
-      <ThreeBackground />
-      <Navbar />
+      <div className="page-bg" aria-hidden="true">
+        <div className="page-bg-grid" />
+        <div className="page-bg-orb page-bg-orb--a" />
+        <div className="page-bg-orb page-bg-orb--b" />
+      </div>
+
+      <Navbar name={data.hero.name} />
 
       <main>
-        <HeroSection data={data.hero} />
-        <AboutSection data={data.about} />
-        <SkillsSection data={data.skills} />
+        <HeroSection data={data.hero} stats={data.about.stats} />
+        <TechMarquee skills={data.skills} />
+        <AboutSection data={data.about} hero={data.hero} experience={data.experience} />
         <ExperienceSection data={data.experience} />
         <ProjectsSection data={data.projects} />
+        <SkillsSection data={data.skills} />
         <ContactSection achievementsData={data.achievements} heroData={data.hero} />
       </main>
 
-      <footer className="portfolio-footer" style={{ color: 'var(--text-muted-2)', fontSize: '0.85rem' }}>
-        <div className="container">
-          <span className='mono'>
-            © {new Date().getFullYear()} {data.hero.name} · Built with Next.js & Three.js
-          </span>
+      <footer className="footer">
+        <div className="wrap footer-inner">
+          <span>© {new Date().getFullYear()} {data.hero.name}</span>
+          <span className="footer-note mono">Made in {data.hero.location?.split(',')[0] || 'Islamabad'} with Next.js and Three.js</span>
+          <a href="#top" className="footer-top">Back to top ↑</a>
         </div>
       </footer>
     </>
